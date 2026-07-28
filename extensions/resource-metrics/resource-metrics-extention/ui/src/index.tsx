@@ -84,4 +84,6 @@ export const component = Extension;
   );
   window?.extensionsAPI?.registerResourceExtension(component, '', 'Pod', 'Metrics', { icon: "fa fa-chart-area" });
   window?.extensionsAPI?.registerResourceExtension(component, '*', 'Deployment', 'Metrics', { icon: "fa fa-chart-area" });
+  window?.extensionsAPI?.registerResourceExtension(component, '*', 'StatefulSet', 'Metrics', { icon: "fa fa-chart-area" });
+  window?.extensionsAPI?.registerResourceExtension(component, '*', 'DaemonSet', 'Metrics', { icon: "fa fa-chart-area" });
 })(window);

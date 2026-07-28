@@ -35,32 +35,32 @@ builds:
 
 dockers:
   - image_templates:
-    - quay.io/argoprojlabs/argocd-extension-metrics:latest
-    - quay.io/argoprojlabs/argocd-extension-metrics:{{ .Tag }}
+      - quay.io/alterway/argocd-extension-metrics:latest
+      - quay.io/alterway/argocd-extension-metrics:{{ .Tag }}
     dockerfile: release.Dockerfile
     build_flag_templates:
-    - "--pull"
-    - "--label=org.opencontainers.image.created={{.Date}}"
-    - "--label=org.opencontainers.image.title={{.ProjectName}}"
-    - "--label=org.opencontainers.image.revision={{.FullCommit}}"
-    - "--label=org.opencontainers.image.version={{.Version}}"
-    - "--platform=linux/amd64"
+      - "--pull"
+      - "--label=org.opencontainers.image.created={{.Date}}"
+      - "--label=org.opencontainers.image.title={{.ProjectName}}"
+      - "--label=org.opencontainers.image.revision={{.FullCommit}}"
+      - "--label=org.opencontainers.image.version={{.Version}}"
+      - "--platform=linux/amd64"
 
 archives:
   - format: tar.gz
     id: binary
     builds:
-    - metrics-server
+      - metrics-server
   - format: gz
     id: ui-extension
     name_template: extension.tar
     meta: true
-    files: 
-    - src: extensions/**/extension.tar
-      strip_parent: true
+    files:
+      - src: extensions/**/extension.tar
+        strip_parent: true
 
 checksum:
-  name_template: 'extension_checksums.txt'
+  name_template: "extension_checksums.txt"
   algorithm: sha256
 
 release:
@@ -72,36 +72,35 @@ release:
 
     ### Docker images
 
-    - quay.io/argoprojlabs/argocd-extension-metrics:{{ .Tag }}
-    - quay.io/argoprojlabs/argocd-extension-metrics:latest
+    - quay.io/alterway/argocd-extension-metrics:{{ .Tag }}
+    - quay.io/alterway/argocd-extension-metrics:latest
 
   footer: |
-    **Full Changelog**: https://github.com/argoproj-labs/argocd-extension-metrics/compare/{{ .PreviousTag }}...{{ .Tag }}
+    **Full Changelog**: https://github.com/alterway/argocd-extension-metrics/compare/{{ .PreviousTag }}...{{ .Tag }}
     <a href="https://argoproj.github.io/cd/"><img src="https://raw.githubusercontent.com/argoproj/argo-site/c42c87e68cea647eadc1564e9e264621442aa8cf/src/images/icon.png" width="25%" ></a>
 
 changelog:
-  use:
-    github
+  use: github
   sort: asc
   abbrev: 0
   groups: # Regex use RE2 syntax as defined here: https://github.com/google/re2/wiki/Syntax.
-    - title: 'Features'
+    - title: "Features"
       regexp: '^.*?feat(\([[:word:]]+\))??!?:.+$'
       order: 100
-    - title: 'Bug fixes'
+    - title: "Bug fixes"
       regexp: '^.*?fix(\([[:word:]]+\))??!?:.+$'
       order: 200
-    - title: 'Documentation'
+    - title: "Documentation"
       regexp: '^.*?docs(\([[:word:]]+\))??!?:.+$'
       order: 300
-    - title: 'Dependency updates'
+    - title: "Dependency updates"
       regexp: '^.*?(feat|fix|chore)\(deps?.+\)!?:.+$'
       order: 400
-    - title: 'Other work'
+    - title: "Other work"
       order: 999
   filters:
     exclude:
-      - '^test:'
+      - "^test:"
       - '^.*?Bump(\([[:word:]]+\))?.+$'
 
 # yaml-language-server: $schema=https://goreleaser.com/static/schema.json
