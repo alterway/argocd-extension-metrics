@@ -109,8 +109,8 @@ data:
                        "title": "Latency",
                        "description": "",
                        "graphType": "line",
-                       "metricName": "pod_template_hash",
-                       "queryExpression": "sum(rate(http_server_requests_seconds_sum {namespace=\"{{"{{.namespace}}"}}\", status=\"200\"} [1m])) by (pod_template_hash) / sum(rate(http_server_requests_seconds_count {namespace=\"{{"{{.namespace}}"}}\", status=\"200\"} [1m])) by (pod_template_hash)"
+                       "metricName": "proxy",
+                       "queryExpression": "avg(haproxy_backend_response_time_average_seconds{proxy=~\"{{"{{.namespace}}"}}_svc_.*{{"{{.name}}"}}.*\"}) by (proxy)"
                      }
                    ]
                  },
@@ -124,16 +124,16 @@ data:
                        "title": "HTTP Error 500",
                        "description": "",
                        "graphType": "line",
-                       "metricName": "pod_template_hash",
-                       "queryExpression": "sum(rate(http_server_requests_seconds_count {namespace=\"{{"{{.namespace}}"}}\", status=\"500\"} [1m])) by (pod_template_hash)"
+                       "metricName": "proxy",
+                       "queryExpression": "sum(rate(haproxy_backend_http_responses_total{proxy=~\"{{"{{.namespace}}"}}_svc_.*{{"{{.name}}"}}.*\", code=\"5xx\"}[1m])) by (proxy)"
                      },
                      {
                        "name": "http_error_rate_400",
                        "title": "HTTP Error 400",
                        "description": "",
                        "graphType": "line",
-                       "metricName": "pod_template_hash",
-                       "queryExpression": "sum(rate(http_server_requests_seconds_count {namespace=\"{{"{{.namespace}}"}}\", status=\"404\"} [1m])) by (pod_template_hash)"
+                       "metricName": "proxy",
+                       "queryExpression": "sum(rate(haproxy_backend_http_responses_total{proxy=~\"{{"{{.namespace}}"}}_svc_.*{{"{{.name}}"}}.*\", code=\"4xx\"}[1m])) by (proxy)"
                      }
                    ]
                  },
@@ -147,8 +147,8 @@ data:
                        "title": "Traffic",
                        "description": "",
                        "graphType": "line",
-                       "metricName": "pod_template_hash",
-                       "queryExpression": "sum(rate(http_server_requests_seconds_count {namespace=\"{{"{{.namespace}}"}}\"} [1m])) by (pod_template_hash)"
+                       "metricName": "proxy",
+                       "queryExpression": "sum(rate(haproxy_backend_http_responses_total{proxy=~\"{{"{{.namespace}}"}}_svc_.*{{"{{.name}}"}}.*\"}[1m])) by (proxy)"
                      }
                    ]
                  },
@@ -207,8 +207,8 @@ data:
                        "title": "Latency",
                        "description": "",
                        "graphType": "line",
-                       "metricName": "rollout_template_hash",
-                       "queryExpression": "sum(rate(http_server_requests_seconds_sum {namespace=\"{{"{{.namespace}}"}}\", status=\"200\"} [1m])) by (rollout_template_hash) / sum(rate(http_server_requests_seconds_count {namespace=\"{{"{{.namespace}}"}}\", status=\"200\"} [1m])) by (rollout_template_hash)"
+                       "metricName": "proxy",
+                       "queryExpression": "avg(haproxy_backend_response_time_average_seconds{proxy=~\"{{"{{.namespace}}"}}_svc_.*{{"{{.name}}"}}.*\"}) by (proxy)"
                      }
                    ]
                  },
@@ -222,16 +222,16 @@ data:
                        "title": "HTTP Error 500",
                        "description": "",
                        "graphType": "line",
-                       "metricName": "rollout_template_hash",
-                       "queryExpression": "sum(rate(http_server_requests_seconds_count {namespace=\"{{"{{.namespace}}"}}\", status=\"500\"} [1m])) by (rollout_template_hash)"
+                       "metricName": "proxy",
+                       "queryExpression": "sum(rate(haproxy_backend_http_responses_total{proxy=~\"{{"{{.namespace}}"}}_svc_.*{{"{{.name}}"}}.*\", code=\"5xx\"}[1m])) by (proxy)"
                      },
                      {
                        "name": "http_error_rate_400",
                        "title": "HTTP Error 400",
                        "description": "",
                        "graphType": "line",
-                       "metricName": "rollout_template_hash",
-                       "queryExpression": "sum(rate(http_server_requests_seconds_count {namespace=\"{{"{{.namespace}}"}}\", status=\"404\"} [1m])) by (rollout_template_hash)"
+                       "metricName": "proxy",
+                       "queryExpression": "sum(rate(haproxy_backend_http_responses_total{proxy=~\"{{"{{.namespace}}"}}_svc_.*{{"{{.name}}"}}.*\", code=\"4xx\"}[1m])) by (proxy)"
                      }
                    ]
                  },
@@ -245,8 +245,8 @@ data:
                        "title": "Traffic",
                        "description": "",
                        "graphType": "line",
-                       "metricName": "rollout_template_hash",
-                       "queryExpression": "sum(rate(http_server_requests_seconds_count {namespace=\"{{"{{.namespace}}"}}\"} [1m])) by (rollout_template_hash)"
+                       "metricName": "proxy",
+                       "queryExpression": "sum(rate(haproxy_backend_http_responses_total{proxy=~\"{{"{{.namespace}}"}}_svc_.*{{"{{.name}}"}}.*\"}[1m])) by (proxy)"
                      }
                    ]
                  },
@@ -305,8 +305,8 @@ data:
                        "title": "Latency",
                        "description": "",
                        "graphType": "line",
-                       "metricName": "pod",
-                       "queryExpression": "sum(rate(http_server_requests_seconds_sum {namespace=\"{{"{{.namespace}}"}}\", pod=~\"{{"{{.name}}"}}\", status=\"200\"} [1m])) by (pod) / sum(rate(http_server_requests_seconds_count {namespace=\"{{"{{.namespace}}"}}\", pod=~\"{{"{{.name}}"}}\", status=\"200\"} [1m])) by (pod)"
+                       "metricName": "proxy",
+                       "queryExpression": "avg(haproxy_backend_response_time_average_seconds{proxy=~\"{{"{{.namespace}}"}}_svc_.*{{"{{.name}}"}}.*\"}) by (proxy)"
                      }
                    ]
                  },
@@ -320,16 +320,16 @@ data:
                        "title": "HTTP Error 500",
                        "description": "",
                        "graphType": "line",
-                       "metricName": "pod",
-                       "queryExpression": "sum(rate(http_server_requests_seconds_count {namespace=\"{{"{{.namespace}}"}}\", pod=~\"{{"{{.name}}"}}\", status=\"500\"} [1m])) by (pod)"
+                       "metricName": "proxy",
+                       "queryExpression": "sum(rate(haproxy_backend_http_responses_total{proxy=~\"{{"{{.namespace}}"}}_svc_.*{{"{{.name}}"}}.*\", code=\"5xx\"}[1m])) by (proxy)"
                      },
                      {
                        "name": "http_error_rate_400",
                        "title": "HTTP Error 400",
                        "description": "",
                        "graphType": "line",
-                       "metricName": "pod",
-                       "queryExpression": "sum(rate(http_server_requests_seconds_count {namespace=\"{{"{{.namespace}}"}}\", pod=~\"{{"{{.name}}"}}\", status=\"404\"} [1m])) by (pod)"
+                       "metricName": "proxy",
+                       "queryExpression": "sum(rate(haproxy_backend_http_responses_total{proxy=~\"{{"{{.namespace}}"}}_svc_.*{{"{{.name}}"}}.*\", code=\"4xx\"}[1m])) by (proxy)"
                      }
                    ]
                  },
@@ -343,8 +343,8 @@ data:
                        "title": "Traffic",
                        "description": "",
                        "graphType": "line",
-                       "metricName": "pod",
-                       "queryExpression": "sum(rate(http_server_requests_seconds_count {namespace=\"{{"{{.namespace}}"}}\", pod=~\"{{"{{.name}}"}}\"} [1m])) by (pod)"
+                       "metricName": "proxy",
+                       "queryExpression": "sum(rate(haproxy_backend_http_responses_total{proxy=~\"{{"{{.namespace}}"}}_svc_.*{{"{{.name}}"}}.*\"}[1m])) by (proxy)"
                      }
                    ]
                  },
@@ -403,8 +403,8 @@ data:
                        "title": "Latency",
                        "description": "",
                        "graphType": "line",
-                       "metricName": "pod",
-                       "queryExpression": "sum(rate(http_server_requests_seconds_sum {namespace=\"{{"{{.namespace}}"}}\", pod=~\"{{"{{.name}}"}}\", status=\"200\"} [1m])) by (pod) / sum(rate(http_server_requests_seconds_count {namespace=\"{{"{{.namespace}}"}}\", pod=~\"{{"{{.name}}"}}\", status=\"200\"} [1m])) by (pod)"
+                       "metricName": "proxy",
+                       "queryExpression": "avg(haproxy_backend_response_time_average_seconds{proxy=~\"{{"{{.namespace}}"}}_svc_.*{{"{{.name}}"}}.*\"}) by (proxy)"
                      }
                    ]
                  },
@@ -418,16 +418,16 @@ data:
                        "title": "HTTP Error 500",
                        "description": "",
                        "graphType": "line",
-                       "metricName": "pod",
-                       "queryExpression": "sum(rate(http_server_requests_seconds_count {namespace=\"{{"{{.namespace}}"}}\", pod=~\"{{"{{.name}}"}}\", status=\"500\"} [1m])) by (pod)"
+                       "metricName": "proxy",
+                       "queryExpression": "sum(rate(haproxy_backend_http_responses_total{proxy=~\"{{"{{.namespace}}"}}_svc_.*{{"{{.name}}"}}.*\", code=\"5xx\"}[1m])) by (proxy)"
                      },
                      {
                        "name": "http_error_rate_400",
                        "title": "HTTP Error 400",
                        "description": "",
                        "graphType": "line",
-                       "metricName": "pod",
-                       "queryExpression": "sum(rate(http_server_requests_seconds_count {namespace=\"{{"{{.namespace}}"}}\", pod=~\"{{"{{.name}}"}}\", status=\"404\"} [1m])) by (pod)"
+                       "metricName": "proxy",
+                       "queryExpression": "sum(rate(haproxy_backend_http_responses_total{proxy=~\"{{"{{.namespace}}"}}_svc_.*{{"{{.name}}"}}.*\", code=\"4xx\"}[1m])) by (proxy)"
                      }
                    ]
                  },
@@ -441,8 +441,8 @@ data:
                        "title": "Traffic",
                        "description": "",
                        "graphType": "line",
-                       "metricName": "pod",
-                       "queryExpression": "sum(rate(http_server_requests_seconds_count {namespace=\"{{"{{.namespace}}"}}\", pod=~\"{{"{{.name}}"}}\"} [1m])) by (pod)"
+                       "metricName": "proxy",
+                       "queryExpression": "sum(rate(haproxy_backend_http_responses_total{proxy=~\"{{"{{.namespace}}"}}_svc_.*{{"{{.name}}"}}.*\"}[1m])) by (proxy)"
                      }
                    ]
                  },
